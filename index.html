@@ -187,7 +187,7 @@
             max-width: 900px;
             margin: auto;
             display: grid;
-            grid-template-columns: 300px 300px 300px;
+            grid-template-columns: 1fr 1fr 1fr;
         }
 
         .blurred-background-container img {
@@ -389,6 +389,50 @@ label {
   margin-bottom: auto;
 }
 
+.backdrop-links {
+    position: absolute;
+    bottom: 24px;
+    background-color: black;
+    padding: 16px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: max-content;
+    display: flex;
+    gap: 16px;
+}
+
+.backdrop-links a {
+    color: white;
+}
+
+.aspect-ratio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+  grid-auto-flow: dense;
+  width: 500px;
+  margin-inline: auto;
+  resize: horizontal;
+  overflow: auto;
+}
+
+.aspect-ratio-grid div {
+  background-color: #3259D0;
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-ratio-grid div:nth-child(n+6) {
+  background-color: #00AD91;
+}
+
+.big {
+  column-span: 2;
+  grid-column: span 2;
+    grid-row: span 2;
+    height: 100%;
+    aspect-ratio: initial !important;
+}
 
     </style>
 </head>
@@ -458,12 +502,6 @@ label {
     <p>Back in 2008 a super smart chap called Gav Thompson realised there was a better way to do mobile. He believed a network could be run without call centres and high street shops. And that it could be powered by members, not customers, who would get rewarded for doing their bit for other members. It’s where the name “giffgaff” comes from. It’s originally a Scots phrase meaning mutual giving. And that sense of community runs through everything we do.</p>
     <p>As you’ll have probably sensed by now, we’re big on community, it’s what makes us the run by you network. Members can have their say and help others on our forums, suggest new ideas in Labs, and create videos and guides on our blog. And like all good communities we believe in being clear and honest in how we communicate and flexible enough to accommodate the needs of everyone.</p>
     </div>
-    </div>
-
-    <div class="section">
-        <div>
-            
-        </div>
     </div>
     
     <div class="section">
@@ -542,6 +580,8 @@ label {
 <div class="blurred-background-container">
 <img src="sea.jpg" alt="crashing waves in the sea">
 <div class="blurred-background"><h2>backdrop-filter example</h2></div>
+<div class="backdrop-links"> <a target="_blank" href="https://vercel.com/blog/everything-about-react-server-components">Vercel</a>
+    <a target="_blank" href="https://www.apple.com/uk/iphone-12/">Apple</a></div>
 </div>
 </div>
 
@@ -559,6 +599,7 @@ label {
 </div>
 
 <div class="section">
+    <h2 class="title-label">mix-blend-mode</h2>
     <div class="blend-mode-grid">
         <div class="bg-pink"></div>
         <img class="blend-mode-example" src="iphone.png" alt="">
@@ -571,6 +612,18 @@ label {
 </div>
 
 <div class="section new-york-times-gradient">
+    <h2 class="title-label">background-blend-mode</h2>
+</div>
+
+<div class="section">
+    <h2 class="title-label">aspect-ratio</h2>
+    <div class="aspect-ratio-grid">
+        <div class="big"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>       
+      </div>
 </div>
 
 </div>
