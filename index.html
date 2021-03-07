@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">    
+
+    <style>
+
+        p {
+            margin-top: 0;
+        }
+
+        .float-example {
+            border: dashed red 4px;
+            background-color: white;
+            display: flow-root;
+            max-width: 700px;
+            margin: auto;
+            margin-top: 48px;
+        }
+        .float-left {
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin-right: 24px;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            max-height: 100vh;
+        }
+
+        .section {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            align-items: center;
+            border: solid 24px white;
+            position: relative;
+        }
+
+        body {
+            font-size: 18px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, Helvetica;
+            line-height: 1.4;
+            background-color: rgb(240,240,240);
+            /* background-color: black;
+            color: white; */
+        }
+
+        .title-label {
+            background-color: black;
+    color: white;
+    position: absolute;
+    left: 0;
+    margin: 0;
+    font-size: 16px;
+    padding: 16px 4px;
+    top: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+        }
+
+        pre {
+            margin: auto;
+        }
+        code {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 24px;
+            width: max-content;
+        }
+
+        .css-tricks-screenshot {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .iphone-with-doodles {
+            float: left;
+            width: 200px;
+            shape-margin: 8px;
+    shape-outside: url(iphone-with-doodles.png);
+        }
+
+    .float-container {
+    width: max-content;
+    display: flow-root;
+    margin: auto;
+        }
+
+        .iphone-text {
+            display: block;
+            margin-top: 48px;
+            width: 500px;
+            margin-left: 16px;
+            text-align: justify;
+        }
+
+        .fancy-list-container {
+            background-color: black;
+            color: white;
+            padding: 80px;
+            place-content: center;
+            place-items: center;
+            font-size: 24px;
+            gap: 40px;
+        }
+
+        .fancy-list li::marker {
+            content: "✨";
+        }
+
+        .fancy-list li {
+            padding-left: 8px;
+        }
+
+        .colored-list li::marker {
+            color: palevioletred;
+        }
+
+        .conic-gradient {
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            width: 300px;
+            height: 300px;
+            background-image: conic-gradient(#FF3F3F, #FFC700, #614EFF, #1890FF, #44F8F8, #FF3F3F);
+        }
+
+        .conic-gradient div {
+            background-color: white;
+            margin: 16px;
+            width: 90%;
+            height: 90%;
+            margin: auto;
+            display: flex;
+        }
+
+        .heart {
+            margin: auto;
+            width: 177px;
+        }
+
+        .multi-col {
+            column-count: 2;
+            max-width: 740px;
+            margin-left: auto;
+            margin-right: auto;
+            gap: 40px;
+        }
+
+        .square {
+            width: 120px;
+            height: 120px;
+            background-color: blue;
+        }
+
+        .blurred-background {
+            background-color: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(4px);
+        }
+
+        .blurred-background-container {
+            margin-top: 100px;
+            max-width: 900px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 300px 300px 300px;
+        }
+
+        .blurred-background-container img {
+            width: 100%;
+            height: auto;
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .blurred-background {
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+            height: 70%;
+            margin-top: auto;
+            margin-bottom: auto;
+            color: white;
+            padding: 48px;
+            display: flex;
+            place-items: center;
+            justify-content: center;
+        } 
+
+        .clipped-container {
+            margin: auto;
+            width: 400px;
+            height: 400px;
+        }
+
+        .clipped-container:hover .clipped {
+            transition: clip-path 450ms ease-out;
+        }
+
+        .clipped {
+            width: 400px;
+            height: 400px;
+            clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+            transition: clip-path 450ms ease-in, filter 450ms ease-in;
+            will-change: clip-path;
+        }
+
+        .clipped-container {
+            margin: auto;
+            width: 400px;
+            height: 400px;
+        }
+
+        .clipped-container:hover .clipped {
+            transition: clip-path 450ms ease-out, filter 450ms ease-out;
+            clip-path: polygon(0 0, 27% 34%, 15% 56%, 18% 82%, 36% 100%, 50% 70%, 60% 100%, 100% 80%, 84% 61%, 91% 37%, 65% 0, 50% 30%);
+            filter: hue-rotate(54deg) brightness(1.25) contrast(120%);
+        }
+
+        .position-relative {
+            position: relative;
+        }
+
+        .rock-hand {
+            position: absolute;
+    bottom: 0;
+    width: 260px;
+    right: 80px;
+
+        }
+
+        .star-svg {
+            width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 40px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    filter: drop-shadow(2px 4px 6px rgb(190, 70, 120, .5));
+        }
+
+        .display-contents-example {
+            display: grid;
+    grid-template-columns: max-content max-content max-content max-content;
+    align-items: center;
+    gap: 40px;
+    /* align-content: center; */
+    justify-content: center;
+    justify-items: center;
+    margin: auto;
+    background-color: black;
+    color: white;
+    padding: 24px;
+        }
+
+        .display-contents-example h2 {
+            margin: 0;
+        }
+
+        .display-contents-example ol {
+            display: contents;
+            list-style-position: inside;
+        }
+
+        .blend-mode-grid {
+            display: grid;
+    grid-template-columns: 1fr 140px 200px 140px 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    width: 100%;
+        }
+
+        .bg-pink {
+            grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    background-color: #FF0066;
+    height: 260px;
+    width: 260px;
+    aspect-ratio: 1 / 1;
+    margin-left: auto;
+    border-radius: 100%;
+    position: relative;
+    left: -100px;
+        }
+
+        .bg-purple {
+            background-color: #5551FF;
+    grid-column: 3 / 6;
+    grid-row: 3 / 4;
+    height: 260px;
+    width: 260px;
+    border-radius: 100%;
+    position: relative;
+    left: 182px;
+        }
+
+        @keyframes hover {
+            0% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(20px);
+            }
+        }
+
+        .blend-mode-example {
+            animation: hover 5000ms infinite alternate cubic-bezier(0.68, 0.4, 0.88, 1.03);
+            object-fit: contain;
+            height: 100%;
+            grid-column: 2 / 5;
+    grid-row: 1 / 4;
+    overflow: hidden;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    padding-block: 40px;
+    filter: drop-shadow(2px 4px 11px rgba(0,0,0,.5));
+        }
+
+        .cover {
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .new-york-times-gradient {
+            background-image: url(nyt.svg), linear-gradient(#E7F190, blue) , url(trump.jpeg);
+    background-size: 110px 110px, 200px 200px, cover;
+    background-repeat: no-repeat;
+    background-position: center 51px, center top, center top;
+    background-blend-mode: normal, screen, normal;
+        }
+
+        .center-child {
+            display: grid;
+            place-content: center;
+        }
+
+        .snap {
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            border: solid 24px white;
+        }
+
+.display-contents-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.display-contents-grid .item {
+  border: solid 2px grey;
+  padding: 8px;
+}
+
+.display-contents-grid form {
+    border: solid 2px red;
+    background-color: wheat;
+}
+
+label {
+  text-align: right;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="section">
+            <img src="microsoft.png" alt="">
+            </div>
+            
+            <div style="display: grid;" class="section">
+                <img style="width: 700px; margin: auto;" src="twitter.png" alt="">
+                <img style="width: 700px; margin: auto;" src="linkedin.png" alt="">
+            </div>
+            
+            <div class="center-child snap">
+                <h2>Centered</h2>
+            </div>
+
+        <div class="section">
+            <img class="css-tricks-screenshot" src="is-float-deprecated.png" alt="">
+        </div>
+
+        <div style="flex-direction: column; justify-content: center; gap: 16px;" class="section">
+            <div style="max-width: 600px;">
+                <img style="width: 120px; height: 120px;" class="float-left" src="sea.jpg" alt="waves in the sea">
+                <p style="margin-top: 0;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla natus, ipsam rem et vero fugiat adipisci itaque. Vel adipisci animi hic expedita veniam, doloribus similique iusto ad quod, assumenda ut nemo aliquid. Tenetur at corrupti earum quisquam dicta adipisci sequi beatae, quidem, delectus odit aperiam necessitatibus quia impedit a vitae id nostrum laudantium nam amet voluptate hic libero! Quae deserunt illum ducimus consequuntur placeat molestias accusamus? Ipsa dignissimos officiis ratione.</p>
+            </div>
+
+            <div style="margin-left: auto; margin-right: auto; text-align: justify; max-width: 600px;">
+                <img style="margin-left: 16px; margin-right: 0; width: 120px; height: 120px; float: right;" class="float-left" src="sea.jpg" alt="waves in the sea">
+                <p style="margin-top: 0;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit hic excepturi animi beatae, adipisci optio distinctio corporis fugit quasi quod deleniti totam neque qui, eum iste dolores! Laudantium ad eligendi aut dicta provident? Deserunt voluptates natus reiciendis neque, officia laudantium sunt odio, explicabo enim quod accusantium hic! Corporis unde asperiores accusamus debitis omnis magni eveniet est aliquid odit sequi, necessitatibus nam voluptatum accusantium culpa minima animi excepturi reprehenderit sit nobis.</p>
+            </div>
+        </div>
+    
+
+    <div style="display: block; position: relative;" class="section">
+        <h2 class="title-label">flow-root</h2>
+        <div style="display: block;" class="float-example">
+            <img class="float-left" src="sea.jpg" alt="waves in the sea">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero officia iure quas? Deleniti nulla veniam reiciendis dolorem atque, reprehenderit aliquam fuga accusantium? Voluptatibus, ratione esse ad corporis voluptate exercitationem recusandae!</p>
+        </div>
+
+        <pre style="margin-top: 80px; background-color: black; color: white; padding: 40px; position: absolute; width: 100%; bottom: 0;">
+<code>.clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+            }</code></pre>
+    </div>
+
+    <div class="section">
+        <h2 class="title-label">shape-outside</h2>
+    <div class="float-container">
+    <img class="iphone-with-doodles" src="iphone-with-doodles.png" alt="">
+    <span class="iphone-text">
+        New dual-camera system. All-day battery. The toughest glass in a smartphone. And Apple’s fastest chip ever. Six stunning new colours. Gorgeous 6.1-inch all-screen Liquid Retina LCD. Water resistant up to 2 metres for 30 minutes.
+</span>
+</div>
+</div>
+
+<div class="section">
+    <h2 class="title-label">column-count/multi-column layout</h2>
+    <div class="multi-col">
+    <p>Put simply, we’re the mobile network run by you, our members. And simplicity is kind of our thing. That’s why we don’t do contracts. We think you should stay with us because you want to, not because you have to.</p>
+    <p>Back in 2008 a super smart chap called Gav Thompson realised there was a better way to do mobile. He believed a network could be run without call centres and high street shops. And that it could be powered by members, not customers, who would get rewarded for doing their bit for other members. It’s where the name “giffgaff” comes from. It’s originally a Scots phrase meaning mutual giving. And that sense of community runs through everything we do.</p>
+    <p>As you’ll have probably sensed by now, we’re big on community, it’s what makes us the run by you network. Members can have their say and help others on our forums, suggest new ideas in Labs, and create videos and guides on our blog. And like all good communities we believe in being clear and honest in how we communicate and flexible enough to accommodate the needs of everyone.</p>
+    </div>
+    </div>
+
+    <div class="section">
+        <div>
+            
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="title-label">display: contents</h2>
+        <div class="display-contents-example">
+            <h2>Buy a new phone</h2>
+            <ol class="display-contents-example__list">
+                <li>This phone is good!</li>
+                <li>It has features!</li>
+                <li>It comes in colours!</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="display-contents-grid">
+            <div class="item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, quas.</div>
+            <div class="item">Lorem ipsum dolor sit amet.</div>
+            <div class="item">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+              <div class="item">Lorem ipsum dolor sit amet consectetur adipisicing.</div>
+            <div class="item">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, reprehenderit laudantium</div>
+            <div class="item">Lorem ipsum dolor sit,</div>
+            <form action="">
+              <label for="">name:</label><input type="text">
+              <label for="">email:</label><input type="email">
+              <label for="">phone number:</label><input type="tel">
+          
+            </form>
+          </div>
+    </div>
+
+<div class="section fancy-list-container">
+    <h2 class="title-label">::marker</h2>
+    <ul class="colored-list">
+        <li>A list item</li>
+        <li>Another list item</li>
+    </ul>
+<ul class="fancy-list">
+    <li>A list item</li>
+    <li>Another list item</li>
+</ul>
+</div>
+
+<div class="section">
+    <h2 class="title-label">conic-gradient</h2>
+    <div class="conic-gradient"></div>
+<div class="conic-gradient">
+    <svg class="heart" viewBox="0 0 68 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M26.5571 59.3682C11.8507 45.5754 2.00213 31.1681 4.12817 18.4726C5.82814 8.32135 14.0829 2.17706 23.5412 3.76098C29.0629 4.68566 33.896 8.84466 35.4669 14.299C38.7659 9.67353 44.6902 7.31602 50.2119 8.2407C59.6572 9.82244 65.4577 18.3338 63.7599 28.4721C61.6339 41.1676 47.618 51.5651 29.2205 59.8142C28.7786 59.9804 28.2327 60.1292 27.791 60.0552C27.3883 59.9878 26.9207 59.6693 26.5571 59.3682Z" fill="url(#paint0_linear)" stroke="black" stroke-width="6" stroke-miterlimit="10"/>
+        <defs>
+        <linearGradient id="paint0_linear" x1="2.5269" y1="28.0345" x2="62.1539" y2="38.0198" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF984B"/>
+        <stop offset="0.9984" stop-color="#FF4ABD"/>
+        </linearGradient>
+        </defs>
+        </svg>
+</div>
+
+<div class="conic-gradient">
+    <div></div>
+</div>
+</div>
+
+<!-- <div class="section">
+<div class="multi-col">
+    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
+    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
+    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
+    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
+    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
+</div>
+</div> -->
+
+<div class="section">
+<h2 class="title-label">backdrop-filter</h2>
+<div class="blurred-background-container">
+<img src="sea.jpg" alt="crashing waves in the sea">
+<div class="blurred-background"><h2>backdrop-filter example</h2></div>
+</div>
+</div>
+
+<div class="section">
+    <h2 class="title-label">clip-path + filter</h2>
+    <div class="clipped-container">
+    <img class="clipped" src="sea.jpg" alt="crashing waves in the sea">
+</div>
+</div>
+
+<div class="section position-relative">
+<h2 class="title-label">filter: drop-shadow</h2>
+ <svg class="star-svg" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 31"><g fill="#E8588A"><path d="M19.247 18.174c-.482.825-.557 1.763-.445 2.7.11 1.05.26 2.1.407 3.15.26 1.988.52 3.975.78 5.925l2.335-1.35c-1.483-1.35-2.966-2.7-4.45-4.087a47.582 47.582 0 01-2.002-1.875c-.26-.225-.593-.6-.742-.788.037.075-.11-.15-.11-.15-.038-.075-.112-.15-.15-.262-.036-.075-.11-.188-.148-.263 0-.037-.148-.3-.074-.15-.296-.825-1.223-1.35-2.04-.825a2029.363 2029.363 0 01-9.27 5.738c.667.525 1.372 1.05 2.04 1.575 1.223-3.225 2.707-6.375 4.375-9.45.297-.525.223-1.275-.222-1.688C6.898 13.937 4.302 11.5 2.559 8.35c-.519.675-1.038 1.388-1.557 2.063 3.523 1.312 7.23 1.95 10.976 2.25.742.037 1.41-.675 1.372-1.388-.037-.787-.593-1.35-1.372-1.387-3.448-.263-6.897-.9-10.235-2.138-.519-.187-1.15.075-1.446.488-.334.45-.37 1.05-.111 1.575 1.854 3.337 4.635 6 7.38 8.587l-.223-1.687c-1.78 3.262-3.3 6.637-4.635 10.125-.186.525.11 1.162.482 1.462.445.338 1.075.413 1.557.113 3.078-1.913 6.156-3.825 9.27-5.738-.667-.262-1.371-.562-2.039-.825.705 1.875 2.225 3.15 3.671 4.463l4.71 4.312c.445.413 1.112.563 1.669.225.593-.337.704-.975.63-1.575-.222-1.8-.482-3.6-.704-5.4-.112-.9-.223-1.762-.371-2.662a5.842 5.842 0 01-.074-.9v-.3-.075c.037-.113.037-.188.074-.263-.037.113-.037.113.037-.075.37-.637.148-1.537-.482-1.912s-1.52-.15-1.892.487z"/><path d="M12.943 12.285c2.225-2.888 4.042-6.075 5.34-9.488h-2.67c.778 2.925 1.335 5.888 1.557 8.925.037.6.408 1.2 1.001 1.35 3.375.9 6.712 1.8 10.087 2.7-.111-.862-.223-1.725-.334-2.55-1.52.788-3.04 1.538-4.561 2.325-1.446.713-3.152 1.313-4.116 2.7-.445.638-.111 1.575.482 1.913.704.412 1.446.112 1.891-.488-.148.188.26-.225.148-.15-.037.038.223-.15.297-.187.297-.188.63-.338.964-.488.705-.337 1.372-.712 2.077-1.05l4.227-2.137c1.076-.563.779-2.25-.333-2.55-3.375-.9-6.712-1.8-10.087-2.7l1.001 1.35c-.26-3.263-.779-6.488-1.631-9.675-.149-.563-.742-1.05-1.335-1.013-.668.038-1.113.413-1.335 1.013-1.076 2.85-2.782 5.85-4.636 8.25-.445.6-.593 1.387 0 1.987.482.45 1.52.563 1.966-.037z"/></g><defs></defs></svg>
+    <img class="rock-hand" src="rock-hand.png" alt="a hand doing a heavy metal sign">
+</div>
+
+<div class="section">
+    <div class="blend-mode-grid">
+        <div class="bg-pink"></div>
+        <img class="blend-mode-example" src="iphone.png" alt="">
+        <div class="bg-purple"></div>
+    </div>
+</div>
+
+<div class="section">
+    <img style="object-fit: contain; height: 100%;" src="nyt-trump.png" alt="">
+</div>
+
+<div class="section new-york-times-gradient">
+</div>
+
+</div>
+</body>
+</html>
