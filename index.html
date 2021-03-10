@@ -406,6 +406,17 @@ label {
     color: white;
 }
 
+.form-example {
+    border: solid 2px;
+    padding: 24px;
+    margin: auto;
+    background-color: white;
+}
+
+.form-example:focus-within {
+    background-color: yellow;
+}
+
 .aspect-ratio-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -433,6 +444,7 @@ label {
     height: 100%;
     aspect-ratio: initial !important;
 }
+
 
     </style>
 </head>
@@ -565,16 +577,6 @@ label {
 </div>
 </div>
 
-<!-- <div class="section">
-<div class="multi-col">
-    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
-    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
-    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
-    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
-    <div><div class="square"></div><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, officia.</p></div>
-</div>
-</div> -->
-
 <div class="section">
 <h2 class="title-label">backdrop-filter</h2>
 <div class="blurred-background-container">
@@ -613,6 +615,15 @@ label {
 
 <div class="section new-york-times-gradient">
     <h2 class="title-label">background-blend-mode</h2>
+</div>
+
+<div class="section">
+    <h2 class="title-label">:focus-within</h2>
+    <form class="form-example" action="">
+        <input type="text">
+        <button>Submit</button>
+        <a target="_blank" href="google.com">Some link</a>
+    </form>
 </div>
 
 <div class="section">
